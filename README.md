@@ -1,3 +1,7 @@
+# 关于这个项目
+
+这是我们组参加第五届字节跳动青训营大项目做的极简版抖音服务端，技术架构与文件结构请参考下面的文档内容。
+
 # tiktok
 
 This is a distributed **simple-tiktok** backend based on RPC and HTTP protocols using Kitex + Hertz + Etcd + MySQL + Jaeger + Docker + Protobuf3
