@@ -1,0 +1,85 @@
+name: basic-test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-all:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up golang
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20.x'
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Build target
+        run: make build-all
+
+      - name: Archive production
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output-all
+          path: output
+
+  run-test:
+    needs: build-all
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Download production
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output-all
+
+      - name: Set up environment
+        uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.ci.yml"
+
+      - name: Run local api server
+        run: nohup sh ./output/api/bootstrap.sh > nohup1.out 2> nohup1.err < /dev/null &
+
+      - name: Run local user server
+        run: nohup sh ./output/user/bootstrap.sh > nohup2.out 2> nohup2.err < /dev/null &
+
+      - name: Run local interaction server
+        run: nohup sh ./output/interaction/bootstrap.sh > nohup3.out 2> nohup3.err < /dev/null &
+
+      - name: Run local follow server
+        run: nohup sh ./output/follow/bootstrap.sh > nohup4.out 2> nohup4.err < /dev/null &
+
+      - name: Run local video server
+        run: nohup sh ./output/video/bootstrap.sh > nohup5.out 2> nohup5.err < /dev/null &
+
+      - name: Run local chat server
+        run: nohup sh ./output/chat/bootstrap.sh > nohup6.out 2> nohup6.err < /dev/null &
+
+      - name: Run user test
+        run: sleep 30 && go test -v ./test/user/...
+
+      - name: Run video test
+        run: go test -v ./test/video/...
+
+      - name: Run interaction test
+        run: go test -v ./test/interaction/...
+
+      - name: Run follow test
+        run: go test -v ./test/follow/...
+
+      - name: Run chat test
+        run: go test -v ./test/chat/...

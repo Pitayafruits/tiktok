@@ -1,0 +1,83 @@
+# NOTICE: copy and rename this file to config.yaml
+# NOTICE: some cofig need to complete
+
+
+# nodes ony need to set this item
+etcd-addr: 172.16.232.8:2379
+
+# etcd server need to complete these items
+server:
+  jwt-secret: MTAxNTkwMTg1Mw==
+  version: "1.0"
+  name: tiktok
+
+snowflake:
+  worker-id: 0
+  datancenter-id: 0
+
+mysql:
+  addr: 127.0.0.1:3306
+  database: tiktok
+  username: tiktok
+  password: tiktok
+  charset: utf8mb4
+
+# you need to complete this config to use video service
+oss:
+  endpoint:
+  accessKey-id:
+  accessKey-secret:
+  bucketname:
+  main-directory: tiktok
+
+elasticsearch:
+  addr: 127.0.0.1:9200
+  host: 127.0.0.1
+
+etcd:
+  addr: 127.0.0.1:2379
+
+rabbitmq:
+  addr: 127.0.0.1:5672
+  username: tiktok
+  password: tiktok
+
+redis:
+  addr: 127.0.0.1:6379
+  password: tiktok
+
+jaeger:
+  addr: 127.0.0.1:6831
+
+# if you deploy in different machines, remember to modify IP.
+services:
+  api:
+    name: api
+    load-balance: false
+    addr:
+      - 127.0.0.1:10001
+  user:
+    name: user
+    load-balance: false
+    addr:
+      - 127.0.0.1:10002
+  chat:
+    name: chat
+    load-balance: false
+    addr:
+      - 127.0.0.1:10003
+  follow:
+    name: follow
+    load-balance: false
+    addr:
+      - 127.0.0.1:10004
+  interaction:
+    name: interaction
+    load-balance: false
+    addr:
+      - 127.0.0.1:10005
+  video:
+    name: video
+    load-balance: false
+    addr:
+      - 127.0.0.1:10006
