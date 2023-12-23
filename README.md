@@ -4,15 +4,6 @@ English | [简体中文](./docs/zh-cn.md)
 
 **tiktok** is a distributed **simple-tiktok** backend based on RPC and HTTP protocols using Kitex + Hertz + etcd + MySQL + Jaeger + Docker + Thrift + Prometheus + Grafana + Elasticsearch + Kibana
 
-# Materials (Simplified Chinese only)
-
-This project is a part of a competition. We have attached our final materials here.
-
-Quietly say: We have achieved a good ranking.
-
-[Documentation](https://west2-online.feishu.cn/docx/Bk20dtIHYoqfDCxnKw6c6eeMnih)
-[Replay of the defense](https://www.bilibili.com/video/BV1Ep4y1P7ZT)
-
 # Feature
 
 - Extremely easy to use and deploy.
@@ -151,15 +142,3 @@ you can drop `.postman/tiktok.openapi.json` to **postman** then start this proje
 
 ## Grafana + Prometheus
 ![grafana](docs/img/grafana.png)
-
-
-# Contributor
-
-Fuzhou University west2-online studio golang team
-
-- [ozline](https://github.com/ozline)
-- [XZ0730](https://github.com/XZ0730)
-- [wushiling50](https://github.com/wushiling50)
-- [jiuxia211](https://github.com/jiuxia211)
-- [Ricky](https://github.com/Ricky-chen1)
-- [jkskj](https://github.com/jkskj)
